@@ -37,18 +37,13 @@ namespace EntryPoint
             goto read_input;
         }
 
-        private static float Distance(Vector2 house, Vector2 specialbuilding)
-        {
-            var distanceX = Math.Pow((house.X - specialbuilding.X), 2);
-            var distanceY = Math.Pow((house.Y - specialbuilding.Y), 2);
-            var result = Math.Sqrt((distanceX + distanceY));
-            return (float)result;
-        }
-
         private static IEnumerable<Vector2> SortSpecialBuildingsByDistance(Vector2 house, IEnumerable<Vector2> specialBuildings)
         {
-            
-            return specialBuildings.OrderBy(v => Distance(house, v));
+            Exercise1 Exercise1 = new Exercise1();
+            Exercise1.House = house;
+            Exercise1.Buildings = specialBuildings.ToArray();
+            Exercise1.MergeSort(Exercise1.Buildings, 0, Exercise1.Buildings.Length - 1);
+            return Exercise1.Buildings;
         }
 
         private static IEnumerable<IEnumerable<Vector2>> FindSpecialBuildingsWithinDistanceFromHouse(
