@@ -47,15 +47,22 @@ namespace EntryPoint
         }
 
         private static IEnumerable<IEnumerable<Vector2>> FindSpecialBuildingsWithinDistanceFromHouse(
-          IEnumerable<Vector2> specialBuildings,
-          IEnumerable<Tuple<Vector2, float>> housesAndDistances)
+        IEnumerable<Vector2> specialBuildings,
+        IEnumerable<Tuple<Vector2, float>> housesAndDistances)
         {
-            return
-                from h in housesAndDistances
-                select
-                  from s in specialBuildings
-                  where Vector2.Distance(h.Item1, s) <= h.Item2
-                  select s;
+            var selected = from h in housesAndDistances
+                       select
+                       from s in specialBuildings
+                       where Vector2.Distance(h.Item1, s) <= h.Item2
+                       select s;
+
+            Exercise2 Exercise2 = new Exercise2(specialBuildings.ToArray(), housesAndDistances.ToList());
+            Exercise2.KDBuilder(Exercise2.SpecialBuildings, 0, Exercise2.SpecialBuildings.Length, 0);
+            Exercise2.TraversePreOrder(Exercise2.Tree);
+            Exercise2.SelectedSpecialBuildings.Add(Exercise2.Test);
+            Exercise2.TraverseSelected(Exercise2.Tree);
+            Console.WriteLine(Exercise2.Counter);
+            return Exercise2.SelectedSpecialBuildings;
         }
 
         private static IEnumerable<Tuple<Vector2, Vector2>> FindRoute(Vector2 startingBuilding,

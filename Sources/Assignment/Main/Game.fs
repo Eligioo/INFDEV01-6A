@@ -315,11 +315,4 @@
 
 
   let random = System.Random()
-  let rec GetInitialValue() =
-    let r = random.Next(1, 6)
-    if r <= 4 then string r
-    else
-      if random.NextDouble() <= 0.1 then
-        "8==D"
-      else
-        GetInitialValue()
+  let rec GetInitialValue() = "2"
